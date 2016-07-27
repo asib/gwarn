@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Gwarn by asib</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Gwarn</h1>
+        <p>A tool that prints warnings in Go source files.</p>
+
+        <p class="view"><a href="https://github.com/asib/gwarn">View the Project on GitHub <small>asib/gwarn</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/asib/gwarn/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/asib/gwarn/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/asib/gwarn">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h2>
+
+<p>To install gwarn, run:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ go get -u github.com/asib/gwarn</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>To run gwarn on all <code>.go</code> files in the current directory:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ gwarn</pre></div>
+
+<p>To run gwarn on all <code>.go</code> files in a specific directory:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ gwarn dir /path/to/dir</pre></div>
+
+<p>To run gwarn on a specific file:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ gwarn file /path/to/file.go</pre></div>
+
+<p>If you're still unsure:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ gwarn <span class="pl-c1">help</span></pre></div>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+
+<div class="highlight highlight-source-go"><pre><span class="pl-c">// main.go</span>
+<span class="pl-k">package</span> main
+
+<span class="pl-k">func</span> <span class="pl-en">main</span>() {
+  <span class="pl-c">//:warning This is a warning that gwarn will see</span>
+}</pre></div>
+
+<p>You can then run:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ gwarn file main.go</pre></div>
+
+<p>and gwarn will output:</p>
+
+<div class="highlight highlight-source-shell"><pre>/path/to/file/main.go:5: This is a warning that gwarn will see</pre></div>
+
+<hr>
+
+<p>Built with <a href="https://github.com/alecthomas/kingpin">kingpin</a>.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/asib">asib</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "Gwarn",
+  "tagline": "A tool that prints warnings in Go source files.",
+  "body": "## Install\r\n\r\nTo install gwarn, run:\r\n\r\n```bash\r\n$ go get -u github.com/asib/gwarn\r\n```\r\n\r\n## Usage\r\n\r\nTo run gwarn on all `.go` files in the current directory:\r\n\r\n```bash\r\n$ gwarn\r\n```\r\n\r\nTo run gwarn on all `.go` files in a specific directory:\r\n\r\n```bash\r\n$ gwarn dir /path/to/dir\r\n```\r\n\r\nTo run gwarn on a specific file:\r\n\r\n```bash\r\n$ gwarn file /path/to/file.go\r\n```\r\n\r\nIf you're still unsure:\r\n\r\n```bash\r\n$ gwarn help\r\n```\r\n\r\n## Example\r\n\r\n```go\r\n// main.go\r\npackage main\r\n\r\nfunc main() {\r\n  //:warning This is a warning that gwarn will see\r\n}\r\n```\r\n\r\nYou can then run:\r\n\r\n```bash\r\n$ gwarn file main.go\r\n```\r\n\r\nand gwarn will output:\r\n\r\n```bash\r\n/path/to/file/main.go:5: This is a warning that gwarn will see\r\n```\r\n\r\n---\r\n\r\nBuilt with [kingpin](https://github.com/alecthomas/kingpin).",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
