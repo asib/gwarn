@@ -7,6 +7,7 @@ import (
 	"go/token"
 	"io"
 	"os"
+	filepathlib "path/filepath"
 	"strings"
 
 	"gopkg.in/alecthomas/kingpin.v2"
@@ -22,13 +23,14 @@ const (
 var (
 	app = kingpin.New("gwarn", "A tool that prints warnings in Go source.")
 
-	check = app.Command("check", "Checks the current directory.").Default()
+	check = app.Command("check", "Recursively checks the current directory.").Default()
 
 	file     = app.Command("file", "Check a specific file.")
 	filepath = file.Arg("filepath", "Path to file to check").Required().ExistingFile()
 
-	dir     = app.Command("dir", "Check a specific directory")
-	dirpath = dir.Arg("dirpath", "Path to directory to check").Required().ExistingDir()
+	dir      = app.Command("dir", "Check a specific directory")
+	dirpath  = dir.Arg("dirpath", "Path to directory to check").Required().ExistingDir()
+	dirRecur = dir.Flag("recursive", "Recursively check the directory.").Short('r').Default("false").Bool()
 
 	out io.Writer = os.Stdout
 )
@@ -73,6 +75,25 @@ func parseDir(dpath string) error {
 	return nil
 }
 
+func parseDirRecursive(dpath string) {
+	filepathlib.Walk(dpath, func(p string, i os.FileInfo, err error) error {
+		if err != nil {
+			fmt.Fprintln(out, "gwarn: walk error:", err)
+			return nil
+		}
+
+		if !i.IsDir() && filepathlib.Ext(p) == ".go" {
+			err = parseFile(p)
+		}
+
+		if err != nil {
+			fmt.Fprintln(out, "gwarn:", err)
+		}
+
+		return nil
+	})
+}
+
 func main() {
 	app.Version(version)
 	app.Author(author)
@@ -85,12 +106,16 @@ func main() {
 			fmt.Fprintln(out, "gwarn: couldn't get current working directory:", err)
 			return
 		} else {
-			err = parseDir(wd)
+			parseDirRecursive(wd)
 		}
 	case file.FullCommand():
 		err = parseFile(*filepath)
 	case dir.FullCommand():
-		err = parseDir(*dirpath)
+		if *dirRecur {
+			parseDirRecursive(*dirpath)
+		} else {
+			err = parseDir(*dirpath)
+		}
 	}
 
 	if err != nil {
