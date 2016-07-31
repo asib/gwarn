@@ -13,13 +13,17 @@ $ go get -u github.com/asib/gwarn
 
 ## Usage
 
-To run gwarn on all `.go` files in the current directory:
+Gwarn recognises any comment that begins `//:warning`.
+
+To run gwarn on all `.go` files in the current directory and all subdirectories
+recursively:
 
 ```bash
 $ gwarn
 ```
 
-To run gwarn on all `.go` files in a specific directory:
+To run gwarn on all `.go` files in a specific directory (use flag `-r` to recurse
+into subdirectories):
 
 ```bash
 $ gwarn dir /path/to/dir
