@@ -38,11 +38,13 @@
 <h2>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>To run gwarn on all <code>.go</code> files in the current directory:</p>
+<p>Gwarn recognises any comment that begins <code>//:warning</code></p>
+
+<p>To run gwarn on all <code>.go</code> files in the current directory and all subdirectories recursively:</p>
 
 <div class="highlight highlight-source-shell"><pre>$ gwarn</pre></div>
 
-<p>To run gwarn on all <code>.go</code> files in a specific directory:</p>
+<p>To run gwarn on all <code>.go</code> files in a specific directory (use flag <code>-r</code> to recurse into subdirectories):</p>
 
 <div class="highlight highlight-source-shell"><pre>$ gwarn dir /path/to/dir</pre></div>
 
